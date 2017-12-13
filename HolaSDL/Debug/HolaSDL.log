@@ -1,8 +1,5 @@
-﻿  Pacman.cpp
-  Ghost.cpp
-  Generando código...
-  Omitiendo... (no se detectaron cambios relevantes)
-  main.cpp
-  Game.cpp
-  HolaSDL.vcxproj -> C:\Users\Alber\Desktop\Universidad\2º\TPV\Pacman2.0\ProyectosSDL\bin\HolaSDLDebug.exe
-  HolaSDL.vcxproj -> C:\Users\Alber\Desktop\Universidad\2º\TPV\Pacman2.0\ProyectosSDL\bin\HolaSDLDebug.pdb (Partial PDB)
+﻿  Game.cpp
+d:\practica 2 tpv\tpv\holasdl\game.cpp(51): error C2065: 'ghost': identificador no declarado
+d:\practica 2 tpv\tpv\holasdl\game.cpp(52): error C2065: 'ghost': identificador no declarado
+d:\practica 2 tpv\tpv\holasdl\game.cpp(52): error C2227: el operando izquierdo de '->render' debe señalar al tipo class/struct/union/generic
+  d:\practica 2 tpv\tpv\holasdl\game.cpp(52): note: el tipo es 'unknown-type'

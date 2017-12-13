@@ -35,12 +35,14 @@ Game::Game()
 	textureGame[6]->load(renderer, "..\\images\\flecha.png");
 
 	Mapa = new GameMap(this);
+	pac = new Pacman(this, Mapa);
 }
 
 void Game::render()
 {
+	SDL_RenderClear(renderer);
 	Mapa->render(renderer, textureGame);
-	list<gameCharacter*>::iterator it = characters.begin();
+	it = characters.begin();
 	while (it != characters.end())
 	{
 		if (Pacman* pac = dynamic_cast<Pacman*>(*it)){
@@ -60,9 +62,35 @@ Game::~Game()
 
 void Game::run()
 {
+
 	creaMapa(true);
 	Mapa->DepuraMapa();
-	render();
+	while (vidas>0)
+	{
+		handleEvents();
+		update();
+		render();
+		SDL_Delay(200);
+	}
+	
+}
+
+void Game::handleEvents()
+{
+
+	SDL_Event event;
+
+	//Control de eventos
+	while (SDL_PollEvent(&event) && !exit) {
+
+		if (event.type == SDL_QUIT)
+			exit = true;
+		else if (event.type == SDL_KEYDOWN)
+		{
+			pac->Ndir(event);
+			exit = false;
+		}
+	}
 }
 
 void Game::creaMapa(bool carga)
@@ -91,3 +119,36 @@ void Game::creaMapa(bool carga)
 	archivoMapa.close();
 	
 }
+void Game::ComeComida(int x, int y)
+{
+	Mapa->cambiacasiila(x, y);
+}
+
+void Game::update()
+{
+	 it = characters.begin();
+	while (it != characters.end())
+	{
+		if ( pac = dynamic_cast<Pacman*>(*it)) {
+			pac->update();
+		}
+		
+		++it;
+	}
+}
+/*void Game::restauraPosciones(Pacman* pacman, int i)
+{
+	if (energia <= 0)
+	{
+		for (int i = 0; i < 4; i++)
+			Fantasmas[i]->setposIni();
+		pacman->setPos(pacman->GetposiniX(), pacman->GetposiniY());
+		restavidas();
+		pacman->setDir(0, 1);
+	}
+
+	else
+		Fantasmas[i]->setposIni();
+
+}
+*/

@@ -37,5 +37,7 @@ public:
 	int getElemMatriz(int i, int j);
 
 	void DepuraMapa();
+	void cambiacasiila(int posX, int posY);
+	void toroide(int& x, int& y);
 };
 

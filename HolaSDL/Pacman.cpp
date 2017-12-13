@@ -18,8 +18,23 @@ void Pacman::loadTexture() {};
 
 void Pacman::render() {};
 
+void Pacman::MuevePacman()
+{
+	siguientePosX = posX + dirX;
+	siguientePosY = posY + dirY;
+	mapa->toroide(siguientePosX, siguientePosY);
+
+	if (!mapa->hayMuro(siguientePosX, siguientePosY))
+	{
+		posX = siguientePosX;
+		posY = siguientePosY;
+	}
+}
+
+
 void Pacman::render(SDL_Renderer* render, Texture* texture)
 {
+	
 	SDL_Rect recDest;
 	recDest.w = game->getWinWidth() / mapa->getDimY();
 	recDest.h = (game->getWinHeight() - 100) / mapa->getDimX();
@@ -51,16 +66,75 @@ void Pacman::render(SDL_Renderer* render, Texture* texture)
 
 }
 
+void Pacman::Ndir(SDL_Event event)
+{
+
+	if (event.type == SDL_KEYDOWN)
+	{
+		if (event.key.keysym.sym == SDLK_RIGHT) {
+			NdirX = 0;
+			NdirY = 1;
+			input = true;
+		}
+		else if (event.key.keysym.sym == SDLK_LEFT) {
+			NdirX = 0;
+			NdirY = -1;
+			input = true;
+		}
+		else if (event.key.keysym.sym == SDLK_UP) {
+			NdirX = -1;
+			NdirY = 0;
+			input = true;
+		}
+		else if (event.key.keysym.sym == SDLK_DOWN) {
+			NdirX = 1;
+			NdirY = 0;
+			input = true;
+		}
+
+	}
+}
+
+
+void Pacman::Buffer()
+{
+	posibledirX = posX + NdirX;
+	posibledirY = posY + NdirY;
+
+	if (!mapa->hayMuro(posibledirX, posibledirY) && input)
+	{
+		dirX = NdirX;
+		dirY = NdirY;
+		NdirX = 0;
+		NdirY = 0;
+		input = false;
+	}
+}
+
 void Pacman::loadFromFile(){};
 
 void Pacman::loadFromFile(ifstream& archivo)
 {
 	int basura;//BASURA SE USA PORQUE COMO AUN NO HAY SMARTGHOST LEO UNA LINEA DE MAS EN PACMAN
 	archivo >> basura;
-	archivo >> posX >> posY >> posiniX >> posiniY >> dirX >> dirY;
+	archivo >> this->posX >> this->posY >> this->posiniX >> this->posiniY >> this->dirX >> this->dirY;
 };
 
 void Pacman::saveToFile() {};
 
-void Pacman::update() {};
+void Pacman::update() 
+{
+	Buffer();
+
+	//DetectaFantasma();
+
+	MuevePacman();
+
+//	DetectaFantasma();
+
+	game->ComeComida(posX, posY);
+
+//S	game->restaEnergia();
+};
+
 

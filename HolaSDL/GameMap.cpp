@@ -100,3 +100,33 @@ void GameMap::DepuraMapa()
 		cout << "\n";
 	}
 }
+
+bool GameMap::hayMuro(int x, int y)
+{
+	//Toroide
+	toroide(x, y);
+
+	if (matrizMapa[x][y] == Wall) { return true; }
+	else { return false; }
+}
+
+void GameMap::toroide(int& x, int& y)
+{
+	if (x < 0) { x = fils - 1; }
+	else if (x > fils - 1) { x = 0; }
+	else if (y > cols - 1) { y = 0; }
+	else if (y < 0) { y = cols - 1; }
+}
+
+void GameMap::cambiacasiila(int posX, int posY)
+{
+	if (matrizMapa[posX][posY] == Vitaminas || matrizMapa[posX][posY] == Food)
+	{
+		if (matrizMapa[posX][posY] == Vitaminas)
+			game->setEnergia(30);
+
+		game->bajacomida();
+		matrizMapa[posX][posY] = empty;
+	}
+
+}

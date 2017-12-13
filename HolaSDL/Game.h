@@ -35,7 +35,7 @@ class Game
 	Texture* fondo;
 	list<gameCharacter*> characters;
 	GameMap* Mapa = nullptr;
-
+	Pacman* pac;
 public:
 	Game();
 	~Game();
@@ -58,9 +58,10 @@ public:
 
 	//METODOS DE COLISIONES CON FANTASMAS Y COMIDA
 	void ComeComida(int x, int y);
-	void restauraPosciones(Pacman* pacman, int i);
+	//void restauraPosciones(Pacman* pacman, int i);
 	void bajacomida() { comidarestante -= 1; };
 	void subecomida() { comidarestante += 1; };
+	void setEnergia(int x) { Energia = x; };
 	bool hayFantasma(int x, int y);
 
 	//METODOS GET
@@ -72,6 +73,7 @@ public:
 	int getWinHeight() { return winHeight; };
 	int getFilas() { return fils; };
 	int getCols() { return cols; };
+	list<gameCharacter*>::iterator it;
 
 };
 
