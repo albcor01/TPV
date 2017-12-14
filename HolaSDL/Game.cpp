@@ -34,23 +34,18 @@ Game::Game()
 	textureGame[5]->load(renderer, "..\\images\\menu.jpg");
 	textureGame[6]->load(renderer, "..\\images\\flecha.png");
 
-	Mapa = new GameMap(this);
-	pac = new Pacman(this, Mapa);
+	Mapa = new GameMap(this, textureGame);
 }
 
 void Game::render()
 {
+	list<gameCharacter*>::iterator it;
 	SDL_RenderClear(renderer);
-	Mapa->render(renderer, textureGame);
+	Mapa->render();
 	it = characters.begin();
 	while (it != characters.end())
 	{
-		if (Pacman* pac = dynamic_cast<Pacman*>(*it)){
-			pac->render(renderer, textureGame[3]);
-		}
-		else if (Ghost* ghost = dynamic_cast<Ghost*>(*it)){
-			ghost->render(renderer, textureGame[3]);
-		}
+		(*it)->render();
 		++it;
 	}
 	SDL_RenderPresent(renderer);
@@ -108,11 +103,11 @@ void Game::creaMapa(bool carga)
 
 	for (int i = 0; i < numFantasmas; i++)
 	{
-		Ghost* fant = new Ghost(this, Mapa, i);
+		Ghost* fant = new Ghost(this, Mapa, i,textureGame[3]);
 		fant->loadFromFile(archivoMapa);
 		characters.push_back(fant);
 	}
-	Pacman* pac = new Pacman(this, Mapa);
+	pac = new Pacman(this, Mapa,textureGame[3]);
 	pac->loadFromFile(archivoMapa);
 	characters.push_back(pac);
 
@@ -126,18 +121,54 @@ void Game::ComeComida(int x, int y)
 
 void Game::update()
 {
+	list<gameCharacter*>::iterator it;
 	 it = characters.begin();
 	while (it != characters.end())
 	{
-		if ( pac = dynamic_cast<Pacman*>(*it)) {
+		if (pac = dynamic_cast<Pacman*>(*it)) {
 			pac->update();
+		}
+		else if (Ghost* ghost = dynamic_cast<Ghost*>(*it)) {
+			ghost->update();
 		}
 		
 		++it;
 	}
 }
-/*void Game::restauraPosciones(Pacman* pacman, int i)
+
+bool Game::HayFantasma(int x, int y)
 {
+	list<gameCharacter*>::iterator it;
+	bool hayfantasma = false;
+	it = characters.begin();
+	while (it != characters.end())
+	{
+		 if (Ghost* ghost = dynamic_cast<Ghost*>(*it)) {
+			 if (x == ghost->GetPosX() && y == ghost->GetPosY())
+				 hayfantasma = true;
+		}
+		++it;
+	}
+
+
+	return hayfantasma;
+}
+
+int Game::GetposXfan(int x)
+{
+	//return Fantasmas[x]->GetPosX();
+	return 0;
+}
+
+int Game::GetposYfan(int x)
+{
+	//return Fantasmas[x]->GetPosY();
+	return 0;
+}
+void Game::restauraPosciones(Pacman* pacman, int i)
+{
+
+	/*
 	if (energia <= 0)
 	{
 		for (int i = 0; i < 4; i++)
@@ -149,6 +180,5 @@ void Game::update()
 
 	else
 		Fantasmas[i]->setposIni();
-
+		*/
 }
-*/

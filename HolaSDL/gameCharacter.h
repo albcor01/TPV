@@ -17,7 +17,7 @@ protected:
 	int posX, posY;
 	int dirX, dirY;
 
-protected:
+public:
 
 	void setposIni() { posX = posiniX; posY = posiniY; }
 	void setPos(int x, int y) { posX = x; posY = y; };

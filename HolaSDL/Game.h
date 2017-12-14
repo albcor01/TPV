@@ -62,7 +62,8 @@ public:
 	void bajacomida() { comidarestante -= 1; };
 	void subecomida() { comidarestante += 1; };
 	void setEnergia(int x) { Energia = x; };
-	bool hayFantasma(int x, int y);
+	void restauraPosciones(Pacman* pacman, int i);
+	bool HayFantasma(int x, int y);
 
 	//METODOS GET
 	SDL_Renderer* getRenderer() { return renderer; };
@@ -73,7 +74,7 @@ public:
 	int getWinHeight() { return winHeight; };
 	int getFilas() { return fils; };
 	int getCols() { return cols; };
-	list<gameCharacter*>::iterator it;
+
 
 };
 

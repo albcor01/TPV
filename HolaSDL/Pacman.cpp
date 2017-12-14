@@ -3,10 +3,11 @@
 #include "GameMap.h"
 
 
-Pacman::Pacman(Game* juego, GameMap* mapa)
+Pacman::Pacman(Game* juego, GameMap* mapa,Texture* pacManTextur)
 {
 	this->game = juego;
 	this->mapa = mapa;
+	pacManTexture = pacManTextur;
 }
 
 
@@ -16,7 +17,6 @@ Pacman::~Pacman()
 
 void Pacman::loadTexture() {};
 
-void Pacman::render() {};
 
 void Pacman::MuevePacman()
 {
@@ -32,7 +32,7 @@ void Pacman::MuevePacman()
 }
 
 
-void Pacman::render(SDL_Renderer* render, Texture* texture)
+void Pacman::render()
 {
 	
 	SDL_Rect recDest;
@@ -42,24 +42,24 @@ void Pacman::render(SDL_Renderer* render, Texture* texture)
 	recDest.y = recDest.h* posX;
 	if (animacion) {
 		if (dirX == 0 && dirY == 1)
-			texture->renderFrame(game->getRenderer(), recDest, 0, 10);
+			pacManTexture->renderFrame(game->getRenderer(), recDest, 0, 10);
 		else if (dirX == 0 && dirY == -1)
-			texture->renderFrame(game->getRenderer(), recDest, 2, 10);
+			pacManTexture->renderFrame(game->getRenderer(), recDest, 2, 10);
 		else if (dirX == 1 && dirY == 0)
-			texture->renderFrame(game->getRenderer(), recDest, 1, 10);
+			pacManTexture->renderFrame(game->getRenderer(), recDest, 1, 10);
 		else if (dirX == -1 && dirY == 0)
-			texture->renderFrame(game->getRenderer(), recDest, 3, 10);
+			pacManTexture->renderFrame(game->getRenderer(), recDest, 3, 10);
 		animacion = false;
 	}
 	else {
 		if (dirX == 0 && dirY == 1)
-			texture->renderFrame(game->getRenderer(), recDest, 0, 11);
+			pacManTexture->renderFrame(game->getRenderer(), recDest, 0, 11);
 		else if (dirX == 0 && dirY == -1)
-			texture->renderFrame(game->getRenderer(), recDest, 2, 11);
+			pacManTexture->renderFrame(game->getRenderer(), recDest, 2, 11);
 		else if (dirX == 1 && dirY == 0)
-			texture->renderFrame(game->getRenderer(), recDest, 1, 11);
+			pacManTexture->renderFrame(game->getRenderer(), recDest, 1, 11);
 		else if (dirX == -1 && dirY == 0)
-			texture->renderFrame(game->getRenderer(), recDest, 3, 11);
+			pacManTexture->renderFrame(game->getRenderer(), recDest, 3, 11);
 		animacion = true;
 	}
 
@@ -120,21 +120,32 @@ void Pacman::loadFromFile(ifstream& archivo)
 	archivo >> this->posX >> this->posY >> this->posiniX >> this->posiniY >> this->dirX >> this->dirY;
 };
 
+void Pacman::DetectaFantasma()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (posX == game->GetposXfan(i) && posY == game->GetposYfan(i))
+		{
+			game->restauraPosciones(this, i);
+		}
+	}
+}
+
 void Pacman::saveToFile() {};
 
 void Pacman::update() 
 {
 	Buffer();
 
-	//DetectaFantasma();
+	DetectaFantasma();
 
 	MuevePacman();
 
-//	DetectaFantasma();
+	DetectaFantasma();
 
 	game->ComeComida(posX, posY);
 
-//S	game->restaEnergia();
+	game->restaEnergia();
 };
 
 

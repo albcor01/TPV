@@ -2,9 +2,13 @@
 
 
 
-GameMap::GameMap(Game* game)
+GameMap::GameMap(Game* game,Texture* textures[7])
 {
 	this->game = game;
+	for (int i = 0; i < 3; i++)
+	{
+		mapTexture[i] = textures[i];
+	}
 }
 
 GameMap::~GameMap()
@@ -14,7 +18,7 @@ GameMap::~GameMap()
 
 void GameMap::loadTexture() {};
 
-void GameMap::render(SDL_Renderer* render, Texture* mapTexture[4]) 
+void GameMap::render() 
 {
 	SDL_Rect recDest;
 	recDest.w = game->getWinWidth() / DimY;
@@ -73,9 +77,6 @@ void GameMap::loadFromFile(ifstream& archivo)
 
 };
 
-void GameMap::render() 
-{
-};
 
 void GameMap::saveToFile() {};
 

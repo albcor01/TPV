@@ -3,7 +3,6 @@
 #pragma once
 class GameMap: public gameObject
 {
-
 	//Dimensiones del mapa
 	int DimX;
 	int DimY;
@@ -11,17 +10,16 @@ class GameMap: public gameObject
 
 	enum MapCell { empty, Wall, Food, Vitaminas }; //Tipos de muro que puede tener el mapa
 	MapCell **matrizMapa;
-
+	Texture* mapTexture[3];
 
 public:
-	GameMap(Game* game);
+	GameMap(Game* game,Texture* textures[7]);
 	~GameMap();
 
 	void loadFromFile();
-	void render();
 
 	void loadTexture();
-	void render(SDL_Renderer* render, Texture* mapTexture[4]);
+	void render();
 	void loadFromFile(ifstream& archivo);
 	void saveToFile();
 	void update();
@@ -35,6 +33,7 @@ public:
 	int getDimX() { return DimX; };
 	int getDimY() { return DimY; };
 	int getElemMatriz(int i, int j);
+
 
 	void DepuraMapa();
 	void cambiacasiila(int posX, int posY);

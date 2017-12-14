@@ -11,13 +11,13 @@ protected:
 
 	Game* game = nullptr;
 
-protected:
+public:
 	gameObject();
 	~gameObject();
 
 	virtual void loadTexture() = 0;
 	virtual void render() = 0;
-	virtual void loadFromFile() = 0;
+	virtual void loadFromFile(ifstream& archivo) = 0;
 	virtual void saveToFile() = 0;
 	virtual void update() = 0;
 };

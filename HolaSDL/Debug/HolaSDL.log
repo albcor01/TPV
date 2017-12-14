@@ -1,5 +1,6 @@
-﻿  Game.cpp
-d:\practica 2 tpv\tpv\holasdl\game.cpp(51): error C2065: 'ghost': identificador no declarado
-d:\practica 2 tpv\tpv\holasdl\game.cpp(52): error C2065: 'ghost': identificador no declarado
-d:\practica 2 tpv\tpv\holasdl\game.cpp(52): error C2227: el operando izquierdo de '->render' debe señalar al tipo class/struct/union/generic
-  d:\practica 2 tpv\tpv\holasdl\game.cpp(52): note: el tipo es 'unknown-type'
+﻿  Pacman.cpp
+  Ghost.cpp
+d:\practica 2 tpv\tpv\holasdl\ghost.cpp(82): warning C4018: '<': no coinciden signed/unsigned
+  Generando código...
+  HolaSDL.vcxproj -> D:\PRACTICA 2 TPV\TPV\bin\HolaSDLDebug.exe
+  HolaSDL.vcxproj -> D:\PRACTICA 2 TPV\TPV\bin\HolaSDLDebug.pdb (Partial PDB)
