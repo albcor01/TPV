@@ -57,7 +57,6 @@ Game::~Game()
 
 void Game::run()
 {
-
 	creaMapa(true);
 	Mapa->DepuraMapa();
 	while (vidas>0)
@@ -67,7 +66,7 @@ void Game::run()
 		render();
 		SDL_Delay(200);
 	}
-	
+	SDL_Quit();
 }
 
 void Game::handleEvents()
@@ -100,7 +99,6 @@ void Game::creaMapa(bool carga)
 
 	archivoMapa >> numFantasmas;
 
-
 	for (int i = 0; i < numFantasmas; i++)
 	{
 		Ghost* fant = new Ghost(this, Mapa, i,textureGame[3]);
@@ -109,7 +107,7 @@ void Game::creaMapa(bool carga)
 	}
 	pac = new Pacman(this, Mapa,textureGame[3]);
 	pac->loadFromFile(archivoMapa);
-	characters.push_back(pac);
+	characters.push_front(pac);
 
 	archivoMapa.close();
 	
@@ -125,12 +123,14 @@ void Game::update()
 	 it = characters.begin();
 	while (it != characters.end())
 	{
-		if (pac = dynamic_cast<Pacman*>(*it)) {
-			pac->update();
-		}
-		else if (Ghost* ghost = dynamic_cast<Ghost*>(*it)) {
+		 if (Ghost* ghost = dynamic_cast<Ghost*>(*it)) {
 			ghost->update();
 		}
+
+		else if (pac = dynamic_cast<Pacman*>(*it)) {
+			pac->update();
+		}
+		
 		
 		++it;
 	}
@@ -150,35 +150,52 @@ bool Game::HayFantasma(int x, int y)
 		++it;
 	}
 
-
 	return hayfantasma;
 }
 
 int Game::GetposXfan(int x)
 {
-	//return Fantasmas[x]->GetPosX();
-	return 0;
+	list<gameCharacter*>::iterator it;
+	it = next(characters.begin(), 1);
+	for (int i = 0; i < x; i++)
+	{
+		it++;
+	}
+	return (*it)->GetPosX();
+	
 }
 
 int Game::GetposYfan(int x)
 {
-	//return Fantasmas[x]->GetPosY();
-	return 0;
+	list<gameCharacter*>::iterator it;
+	it = next(characters.begin(), 1);
+	for (int i = 0; i < x; i++)
+	{
+		it++;
+	}
+
+	return (*it)->GetPosY();
 }
 void Game::restauraPosciones(Pacman* pacman, int i)
 {
-
-	/*
-	if (energia <= 0)
+	list<gameCharacter*>::iterator it;
+	it = next(characters.begin(), 1);
+	if (Energia <= 0)
 	{
-		for (int i = 0; i < 4; i++)
-			Fantasmas[i]->setposIni();
-		pacman->setPos(pacman->GetposiniX(), pacman->GetposiniY());
-		restavidas();
-		pacman->setDir(0, 1);
+		for (int t = 0; t < 4; t++)
+		{
+			(*it)->setposIni();
+			it++;
+		}
+		pac->setPos(pacman->GetposiniX(), pacman->GetposiniY());
+		restaVidas();
+		pac->setDir(0, 1);
 	}
 
 	else
-		Fantasmas[i]->setposIni();
-		*/
+	{
+		for (int t = 0; t < i; t++)
+			it++;
+		(*it)->setposIni();
+	}
 }

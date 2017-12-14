@@ -126,6 +126,7 @@ void Pacman::DetectaFantasma()
 	{
 		if (posX == game->GetposXfan(i) && posY == game->GetposYfan(i))
 		{
+			cout << "KSVFSUVD";
 			game->restauraPosciones(this, i);
 		}
 	}

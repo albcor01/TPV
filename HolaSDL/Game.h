@@ -49,7 +49,7 @@ public:
 	void update();
 	void render();
 	void handleEvents();
-	void restaVidas() { vidas -= 1; }
+	void restaVidas() { vidas --; }
 	void pintaVidas();
 
 	//METODOS DE ENERGIA

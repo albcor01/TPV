@@ -1,6 +1,4 @@
-﻿  Pacman.cpp
-  Ghost.cpp
-d:\practica 2 tpv\tpv\holasdl\ghost.cpp(82): warning C4018: '<': no coinciden signed/unsigned
-  Generando código...
+﻿  Game.cpp
+d:\practica 2 tpv\tpv\holasdl\game.cpp(94): warning C4101: 'elemento': variable local sin referencia
   HolaSDL.vcxproj -> D:\PRACTICA 2 TPV\TPV\bin\HolaSDLDebug.exe
   HolaSDL.vcxproj -> D:\PRACTICA 2 TPV\TPV\bin\HolaSDLDebug.pdb (Partial PDB)
