@@ -2,6 +2,7 @@
 #pragma once
 class Ghost: public gameCharacter
 {
+protected:
 	struct Dirs
 	{
 		int x;
@@ -9,7 +10,6 @@ class Ghost: public gameCharacter
 	};
 	vector<Dirs> posDirs;
 	Texture* GhostTexture;
-	int tipo;
 	int numfils, numcol;
 	int NumeroFantasma;
 	bool patas = true;

@@ -5,6 +5,7 @@
 #include "GameMap.h"
 #include "Pacman.h"
 #include "Ghost.h"
+#include "SmartGhost.h"
 #include "gameCharacter.h"
 
 using namespace std;
@@ -101,9 +102,22 @@ void Game::creaMapa(bool carga)
 
 	for (int i = 0; i < numFantasmas; i++)
 	{
-		Ghost* fant = new Ghost(this, Mapa, i,textureGame[3]);
-		fant->loadFromFile(archivoMapa);
-		characters.push_back(fant);
+		int tipo;
+		archivoMapa >> tipo;
+
+		if (tipo == 0)
+		{
+			Ghost* fant = new Ghost(this, Mapa, i, textureGame[3]);
+			fant->loadFromFile(archivoMapa);
+			characters.push_back(fant);
+		}
+		else
+		{
+			SmartGhost* fant = new Ghost(this, Mapa, i, textureGame[3]);
+			fant->loadFromFile(archivoMapa);
+			characters.push_back(fant);
+		}
+		
 	}
 	pac = new Pacman(this, Mapa,textureGame[3]);
 	pac->loadFromFile(archivoMapa);

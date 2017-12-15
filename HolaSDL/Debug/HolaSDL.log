@@ -1,4 +1,4 @@
-﻿  Game.cpp
-d:\practica 2 tpv\tpv\holasdl\game.cpp(94): warning C4101: 'elemento': variable local sin referencia
-  HolaSDL.vcxproj -> D:\PRACTICA 2 TPV\TPV\bin\HolaSDLDebug.exe
-  HolaSDL.vcxproj -> D:\PRACTICA 2 TPV\TPV\bin\HolaSDLDebug.pdb (Partial PDB)
+﻿  SmartGhost.cpp
+c:\users\alber\desktop\universidad\2º\tpv\pacman2.0\proyectossdl\holasdl\smartghost.cpp(23): warning C4018: '<': no coinciden signed/unsigned
+  HolaSDL.vcxproj -> C:\Users\Alber\Desktop\Universidad\2º\TPV\Pacman2.0\ProyectosSDL\bin\HolaSDLDebug.exe
+  HolaSDL.vcxproj -> C:\Users\Alber\Desktop\Universidad\2º\TPV\Pacman2.0\ProyectosSDL\bin\HolaSDLDebug.pdb (Partial PDB)

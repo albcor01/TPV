@@ -2,12 +2,12 @@
 
 
 
-Ghost::Ghost(Game* juego, GameMap* mapa, int numFant,Texture* GhostTextur)
+Ghost::Ghost(Game* juego, GameMap* mapa, int numFant,Texture* GhostTexture)
 {
 	this->game = juego;
 	this->mapa = mapa;
 	numcol = numFant * 2;
-	this->GhostTexture = GhostTextur;
+	this->GhostTexture = GhostTexture;
 }
 
 
@@ -54,10 +54,8 @@ void Ghost::render()
 
 void Ghost::loadFromFile(ifstream& archivo) 
 {
-	archivo >> tipo >> posX >> posY >> posiniX >> posiniY >> dirX >> dirY;
+	archivo >> posX >> posY >> posiniX >> posiniY >> dirX >> dirY;
 };
-
-
 
 void Ghost::saveToFile() {};
 
@@ -91,8 +89,6 @@ void Ghost::PosiblesDirs()
 	{
 		RellenaPos(-dirX, -dirY);
 	}
-
-
 }
 
 
